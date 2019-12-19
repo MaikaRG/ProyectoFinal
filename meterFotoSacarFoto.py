@@ -8,10 +8,11 @@ from skimage.io import imsave
 import CargarModelo
 import tensorflow as tf
 import os
-inception = InceptionResNetV2(weights='imagenet', include_top=True)
-inception.graph = tf.compat.v1.get_default_graph
+import webbrowser
 
 def create_inception_embedding(grayscaled_rgb):
+    inception = InceptionResNetV2(weights='imagenet', include_top=True)
+    #inception.graph = tf.compat.v1.get_default_graph()
     grayscaled_rgb_resized = []
     for i in grayscaled_rgb:
         i = resize(i, (299, 299, 3), mode='constant')
@@ -36,11 +37,12 @@ def resizeImages():
     color_me_embed = create_inception_embedding(gray_me)
     color_me = rgb2lab(1.0/255*color_me)[:,:,:,0]
     color_me = color_me.reshape(color_me.shape+(1,))
-    output=CargarModelo.loaded_model.predict([color_me, color_me_embed])
+    output=CargarModelo.modelo().predict([color_me, color_me_embed])
     output = output*128
     for i in range(len(output)):
       cur = np.zeros((256, 256, 3))
       cur[:,:,0] = color_me[i][:,:,0]
       cur[:,:,1:] = output[i]
       imsave('./output/img.png', lab2rgb(cur))
-resizeImages()
+    #return webbrowser.open('./output/img.png')
+#resizeImages()

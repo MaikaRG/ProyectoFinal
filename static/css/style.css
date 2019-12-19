@@ -1,0 +1,19 @@
+body{
+    background-color: rgb(131, 197, 194);
+  }
+
+  .title{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .inputCenter{
+    margin: 0 auto;
+  }
+
+  .send{
+    margin-top: 20px;
+  }
+    
