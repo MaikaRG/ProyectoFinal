@@ -31,7 +31,7 @@ def uploader():
   # Guardamos el archivo en el directorio "Archivos PDF"
   f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
   # Retornamos una respuesta satisfactoria con la predicción
-  meterFotoSacarFoto.resizeImages()
+  meterFotoSacarFoto.resizeImages(os.path.join(app.config['UPLOAD_FOLDER'], filename))
   return render_template('colorearImagen.html', pred='/output/img.png')
   #return render_template('colorearImagen.html', pred=pred)
   

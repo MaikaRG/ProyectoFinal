@@ -22,13 +22,13 @@ def create_inception_embedding(grayscaled_rgb):
     embed = inception.predict(grayscaled_rgb_resized)
     return embed
 
-def resizePutasImagenes():
-  color_me = (img_to_array(load_img('./input/mio.jpg')))
+def resizePutasImagenes(path):
+  color_me = (img_to_array(load_img(path)))
   color_me =resize(color_me, (256, 256), mode='constant')
-  imsave("./input/mio.jpg", color_me)
+  imsave(path, color_me)
 
-def resizeImages():
-    resizePutasImagenes()
+def resizeImages(path):
+    resizePutasImagenes(path)
     color_me = []
     for filename in os.listdir('./input/'):
       color_me.append(img_to_array(load_img('./input/'+filename)))
